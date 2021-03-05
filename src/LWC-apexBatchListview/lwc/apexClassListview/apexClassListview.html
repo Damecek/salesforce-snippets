@@ -1,0 +1,34 @@
+<template>
+    <div class="slds-grid slds-grid_vertical slds-box_border slds">
+        <div if:true={loading} class="slds-align_absolute-center">
+            <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+        </div>
+        <div class="slds-col slds-grid slds-p-around_medium">
+            <div class="slds-size_1-of-6">
+                <lightning-combobox name="class" label="Class Name" value={className.value} placeholder="Select Class Name"
+                                    options={className.options} onchange={handleChangeClass} >
+                </lightning-combobox>
+                <lightning-combobox name="range" label="Date Range" value={dateRangeValue} placeholder="Select Date Range"
+                                    options={dateRangeOptions} onchange={handleChangeRange} >
+                </lightning-combobox>
+                <div class="slds-p-top_small">
+                    <lightning-button-group>
+                        <lightning-button-stateful label-when-off="Realtime" label-when-on="Realtime" icon-name-when-off="utility:play"
+                                                   icon-name-when-on="utility:pause" selected={isSelectedRealtime} onclick={handleClickRealtime}>
+                        </lightning-button-stateful>
+                        <lightning-button-icon icon-name="utility:loop"  alternative-text="Settings" title="Settings"
+                                               disabled={isSelectedRealtime} onclick={handleClickRefresh} >
+                        </lightning-button-icon>
+                    </lightning-button-group>
+                </div>
+            </div>
+            <div class="slds-size_5-of-6">
+                <div class="slds-m-left_medium slds-box_border" style="height: 27em">
+                    <lightning-datatable key-field="id" data={data} hide-checkbox-column show-row-number-column
+                                         columns={columns} enable-infinite-loading onloadmore={loadMoreData}>
+                    </lightning-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
